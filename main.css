@@ -1,0 +1,36 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+.main-container {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.title {
+  text-align: center;
+  background-color: green;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+}
+.words-container {
+  background-color: wheat;
+  height: 60px;
+  margin: 10px 0;
+}
+.game-container {
+  text-align: center;
+}
+.game-container input {
+  padding: 2px 5px;
+  border-radius: 5px;
+  height: 20px;
+  min-width: 150px;
+  max-width: 600px;
+}
+.game-container .timer {
+  background-color: grey;
+  padding: 2px 5px;
+  color: white;
+  border-radius: 3px;
+}
