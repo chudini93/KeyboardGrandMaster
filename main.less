@@ -1,43 +1,108 @@
+@mainColor: #3498db;
+@mainColorDarker: #2980b9;
+@wetAsphalt: #2c3e50;
+@whiteColor: #ffffff;
+@fontRegular: 1.7em;
+@fontSmall: 1.2em;
+@fontSmaller: 1.0em;
+@fontSmallest: 0.5em;
+
 body{
     font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    background-image: url("images/clouds.png");
+    background-size: cover;    
+}
+
+*:focus {
+    outline: none;
+}
+
+.navigation{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 37px;
+    z-index: 10;
+    background-color: @mainColor;
+    text-align: center;
+
+    .title{
+        margin:0;
+        text-align: center;
+        color: white;
+        text-transform: uppercase;
+        display: inline;
+    }
+}
+
+.center-middle{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .main-container{
     width: 800px;
     margin-left: auto;
     margin-right: auto;
-}
-
-.title{
-    text-align: center;
-    background-color: green;
-    color: white;
-    text-transform: uppercase;
-    font-family: 'Courier New', Courier, monospace;
+    margin-top: 40px;    
 }
 
 .words-container{
-    background-color: wheat;
-    height: 60px;
+    background-color: @whiteColor;
+    height: 10em;
     margin: 10px 0;
 }
 
 .game-container{
     text-align: center;
+    animation-duration: 2s;
+    animation-name: fadein;
 
     input{
-        padding: 2px 5px;
+        padding: 4px 10px;
         border-radius: 5px;
-        height: 20px;
+        border: 1px solid @mainColor;
+        height: 40px;
+        width: 40%;
         min-width: 150px;
         max-width: 600px;
+        vertical-align: middle;
+        font-size: @fontRegular;
     }
 
     .timer {
-        background-color:  grey;
-        padding: 2px 5px;
+        background-color:  @wetAsphalt;
+        padding: 10px 8px;
         color: white;
         border-radius: 3px;
+        font-size: @fontSmall;
+    }
+    
+    .btn{
+        padding: 10px 8px;
+        font-size: @fontSmall;
+        border-radius: 3px;
+        border: 1px solid @mainColor;
+        background-color: @mainColor;
+        color: @whiteColor;
+    }
+    .btn:hover{
+        cursor: pointer;
+        background-color: @mainColorDarker;
     }
 }
+
+@keyframes fadein {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1.0;
+    }
+  }
+
 
