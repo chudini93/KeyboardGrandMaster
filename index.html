@@ -6,20 +6,27 @@
     <title>Typing GrandMaster</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="main.css" />
-    <script src="main.js"></script>
 </head>
 <body>
+    <div class="navigation">
+        <h1 class="title">Typing GrandMaster</h1>
+    </div>
     <div class="main-container">
-        <div class="title">
-            <h1>Typing GrandMaster</h1>
-        </div>
         <div class="words-container">
-            
+            <span id="current-word">horse</span>
         </div>
         <div class="game-container">
-            <input type="text" autofocus />
-            <span class="timer">1:00</span>
+            <input id="word-input" type="text" placeholder="Start typing..." autofocus />
+            <span id="timer" class="timer" >1:00</span>
+            <button class="btn">Start over again</button>
+        </div>
+        <div>
+            <h1><span id="wpm"></span> WPM</h1>
+            <h1><span id="seconds"></span> seconds</h1>
         </div>
     </div>
+
+    
+    <script src="js/main.js"></script>
 </body>
 </html>
