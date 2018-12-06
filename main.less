@@ -4,21 +4,20 @@
 @whiteColor: #ffffff;
 @fontRegular: 1.7em;
 @fontSmall: 1.2em;
-@fontSmaller: 1.0em;
+@fontSmaller: 1em;
 @fontSmallest: 0.5em;
-
-body{
-    font-family: 'Courier New', Courier, monospace;
+body {
+    font-family: "Courier New", Courier, monospace;
     margin: 0;
     background-image: url("images/clouds.png");
-    background-size: cover;    
+    background-size: cover;
 }
 
 *:focus {
     outline: none;
 }
 
-.navigation{
+.navigation {
     position: fixed;
     width: 100%;
     top: 0;
@@ -26,9 +25,8 @@ body{
     z-index: 10;
     background-color: @mainColor;
     text-align: center;
-
-    .title{
-        margin:0;
+    .title {
+        margin: 0;
         text-align: center;
         color: white;
         text-transform: uppercase;
@@ -36,32 +34,39 @@ body{
     }
 }
 
-.center-middle{
+.center-middle {
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
 
-.main-container{
+.main-container {
     width: 800px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 40px;    
+    margin-top: 40px;
+    #score-panel {
+        margin-top: 20px;
+        background-color: @whiteColor;
+        border: 1px solid @mainColor;
+        text-align: center;
+        visibility: hidden;
+        font-size: @fontSmallest;
+    }
 }
 
-.words-container{
+.words-container {
     background-color: @whiteColor;
     height: 10em;
     margin: 10px 0;
 }
 
-.game-container{
+.game-container {
     text-align: center;
     animation-duration: 2s;
     animation-name: fadein;
-
-    input{
+    input {
         padding: 4px 10px;
         border-radius: 5px;
         border: 1px solid @mainColor;
@@ -72,16 +77,14 @@ body{
         vertical-align: middle;
         font-size: @fontRegular;
     }
-
     .timer {
-        background-color:  @wetAsphalt;
+        background-color: @wetAsphalt;
         padding: 10px 8px;
         color: white;
         border-radius: 3px;
         font-size: @fontSmall;
     }
-    
-    .btn{
+    .btn {
         padding: 10px 8px;
         font-size: @fontSmall;
         border-radius: 3px;
@@ -89,7 +92,7 @@ body{
         background-color: @mainColor;
         color: @whiteColor;
     }
-    .btn:hover{
+    .btn:hover {
         cursor: pointer;
         background-color: @mainColorDarker;
     }
@@ -97,12 +100,9 @@ body{
 
 @keyframes fadein {
     from {
-      opacity: 0;
+        opacity: 0;
     }
-  
     to {
-      opacity: 1.0;
+        opacity: 1;
     }
-  }
-
-
+}

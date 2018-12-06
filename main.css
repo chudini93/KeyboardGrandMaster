@@ -1,5 +1,5 @@
 body {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   margin: 0;
   background-image: url("images/clouds.png");
   background-size: cover;
@@ -34,6 +34,14 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
+}
+.main-container #score-panel {
+  margin-top: 20px;
+  background-color: #ffffff;
+  border: 1px solid #3498db;
+  text-align: center;
+  visibility: hidden;
+  font-size: 0.5em;
 }
 .words-container {
   background-color: #ffffff;
@@ -80,6 +88,6 @@ body {
     opacity: 0;
   }
   to {
-    opacity: 1.0;
+    opacity: 1;
   }
 }

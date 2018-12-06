@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Typing GrandMaster</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="main.css" />
-</head>
-<body>
-    <div class="navigation">
-        <h1 class="title">Typing GrandMaster</h1>
-    </div>
+  </head>
+  <body>
+    <div class="navigation"><h1 class="title">Typing GrandMaster</h1></div>
     <div class="main-container">
-        <div class="words-container">
-            <span id="current-word">horse</span>
-        </div>
-        <div class="game-container">
-            <input id="word-input" type="text" placeholder="Start typing..." autofocus />
-            <span id="timer" class="timer" >1:00</span>
-            <button class="btn">Start over again</button>
-        </div>
-        <div>
-            <h1><span id="wpm"></span> WPM</h1>
-            <h1><span id="seconds"></span> seconds</h1>
-        </div>
+      <div class="words-container"><span id="current-word">horse</span></div>
+      <div class="game-container">
+        <input
+          id="word-input"
+          type="text"
+          placeholder="Start typing..."
+          autofocus
+        />
+        <span id="timer" class="timer">0:30</span>
+        <button class="btn" id="repeat">Start over again</button>
+      </div>
+      <div id="score-panel">
+        <h1><span id="message"></span></h1>
+        <h1><span id="wpm"></span> WPM</h1>
+        <h1><span id="keystrokes"></span></h1>
+      </div>
     </div>
 
-    
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>
