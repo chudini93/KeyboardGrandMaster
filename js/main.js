@@ -29,7 +29,7 @@ function init() {
 
   repeatButton.addEventListener("click", resetGame);
 
-  wordInput.addEventListener("input", startGame);
+  wordInput.addEventListener("keyup", startGame);
 
   // Check game status.
   setInterval(checkStatus, 50);
@@ -48,7 +48,7 @@ function resetGame() {
 }
 
 // Starts the game if possible.
-function startGame() {
+function startGame(keyboardEvent) {
   if (userStartedTypingAndGameNotStarted()) {
     console.log("----------> Game has been started <-------------");
     isPlaying = true;
@@ -56,7 +56,7 @@ function startGame() {
   }
 
   if (isPlaying) {
-    startComparingWords();
+    startComparingWords(keyboardEvent.key);
   }
 }
 
