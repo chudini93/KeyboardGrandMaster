@@ -43,10 +43,36 @@ body {
   visibility: hidden;
   font-size: 0.5em;
 }
-.words-container {
+.words-parent {
   background-color: #ffffff;
-  height: 10em;
+  height: 5em;
   margin: 10px 0;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #3498db;
+}
+.words-parent #words-container {
+  position: relative;
+}
+.words-parent #words-container span {
+  padding: 3px 5px;
+  font-size: 2em;
+  font-family: "Times New Roman", Times, serif;
+}
+.words-parent #words-container span.current-word {
+  font-weight: bold;
+}
+.words-parent #words-container span.success {
+  color: green;
+}
+.words-parent #words-container span.wrong {
+  color: red;
+}
+.words-parent #words-container span.partially-wrong {
+  color: #dd6300;
+}
+.words-parent #words-container span::after {
+  content: " ";
 }
 .game-container {
   text-align: center;

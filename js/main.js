@@ -10,18 +10,17 @@ let incorrectKeystrokes = 0;
 let isPlaying;
 let timeDisplayFormat = "0:00";
 let countdownId;
+let currentWord;
 
 // DOM Elements
+const wordsContainer = getWordsContainer();
 const wordInput = document.querySelector("#word-input");
-const currentWord = document.querySelector("#current-word");
 const wpmDisplay = document.querySelector("#wpm");
 const keystrokesDisplay = document.querySelector("#keystrokes");
 const timeDisplay = document.querySelector("#timer");
 const message = document.querySelector("#message");
 const scorePanel = document.querySelector("#score-panel");
 const repeatButton = document.querySelector("#repeat");
-
-const words = wordsSetup;
 
 // Initialize Game.
 function init() {
@@ -43,8 +42,8 @@ function resetGame() {
   stopGame();
   showWordInput();
 
-  // Load word from array.
-  showNewWord(words);
+  // Load words inside container.
+  loadWords();
 }
 
 // Starts the game if possible.
@@ -96,4 +95,8 @@ function checkStatus() {
 function isTimeOverAndGameNotPlaying() {
   var output = isPlaying && timerSeconds === 0 && timerMinutes === 0;
   return output;
+}
+
+function reloadCurrentWord() {
+  currentWord = document.querySelector(".current-word");
 }

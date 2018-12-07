@@ -4,22 +4,20 @@ function startComparingWords(keyPressed) {
   var currWord = currentWord.innerHTML;
 
   if (userInput.length == currWord.length && validKeyPressed) {
-    if (compareWords(userInput, currWord)) {
-      // TODO: Go to next word.
-      // Mark success class to current word.
-      showNewWord(words);
+    if (isWordCorrect(userInput, currWord)) {
+      jumpToNextWord(currentWord);
       clearWordInput();
     } else {
       // Wrong word.
-      // TODO: Mark wrong class to current word.
+      markCurrentWordAsWrong(currentWord);
     }
   } else {
     if (comparePartialWord(userInput, currWord)) {
-      // Right word, indicate yellow for now!
+      // Partially right word.
       console.log("Partial words are matching");
     } else {
       // Wrong word
-      // TODO: Mark wrong class to current word.
+      markCurrentWordAsPartiallyWrong(currentWord);
     }
   }
 }
@@ -30,7 +28,7 @@ function validKeyPressed(key) {
 }
 
 // Match currentWord to wordInput.
-function compareWords(wordInput, currentWord) {
+function isWordCorrect(wordInput, currentWord) {
   if (wordInput === currentWord) {
     message.innerHTML = "Correct";
 

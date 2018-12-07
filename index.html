@@ -10,7 +10,11 @@
   <body>
     <div class="navigation"><h1 class="title">Typing GrandMaster</h1></div>
     <div class="main-container">
-      <div class="words-container"><span id="current-word">horse</span></div>
+      <div class="words-parent">
+        <div id="words-container">
+          <span id="dummy" class="current-word">Dummy</span>
+        </div>
+      </div>
       <div class="game-container">
         <input
           id="word-input"
@@ -28,8 +32,10 @@
       </div>
     </div>
 
-    <script src="js/wordFunctions.js"></script>
+    <script src="js/words.js"></script>
+    <script src="js/loadFunctions.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/disableF5.js"></script>
     <script src="js/wordInputFunctions.js"></script>
     <script src="js/timerFunctions.js"></script>
     <script src="js/scoreFunctions.js"></script>
