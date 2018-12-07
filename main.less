@@ -56,10 +56,36 @@ body {
     }
 }
 
-.words-container {
+.words-parent {
     background-color: @whiteColor;
-    height: 10em;
+    height: 5em;
     margin: 10px 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid @mainColor;
+    #words-container {
+        position: relative;
+        span {
+            padding: 3px 5px;
+            font-size: 2em;
+            font-family: "Times New Roman", Times, serif;
+        }
+        span.current-word {
+            font-weight: bold;
+        }
+        span.success {
+            color: green;
+        }
+        span.wrong {
+            color: red;
+        }
+        span.partially-wrong {
+            color: rgb(221, 99, 0);
+        }
+        span::after {
+            content: " ";
+        }
+    }
 }
 
 .game-container {
