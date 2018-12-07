@@ -2,13 +2,14 @@ window.addEventListener("load", init);
 
 // Globals
 const initialTimerMinutes = 0;
-const initialTimerSeconds = 30;
+const initialTimerSeconds = 20;
 let timerMinutes = initialTimerMinutes;
 let timerSeconds = initialTimerSeconds;
 let correctKeystrokes = 0;
 let incorrectKeystrokes = 0;
 let isPlaying;
 let timeDisplayFormat = "0:00";
+let countdownId;
 
 // DOM Elements
 const wordInput = document.querySelector("#word-input");
@@ -24,9 +25,10 @@ const words = ["hat", "river", "lucky", "statue", "generate", "joke"];
 
 // Initialize Game.
 function init() {
-  startGame();
-  // TODO: listener for button
-  // repeatButton.addEventListener("click", startGame());
+  resetGame();
+
+  // Repeat button functionality.
+  repeatButton.addEventListener("click", resetGame);
 
   // Start matching on word input.
   wordInput.addEventListener("input", startMatch);
@@ -35,17 +37,21 @@ function init() {
   setInterval(checkStatus, 50);
 }
 
-function startGame() {
-  timerMinutes = initialTimerMinutes;
-  timerSeconds = initialTimerSeconds;
-  correctKeystrokes = 0;
-  incorrectKeystrokes = 0;
+function resetGame() {
+  console.log("----------> Game has been reset <-------------");
+  resetTimer();
+  resetGlobals();
   isPlaying = false;
-
-  scorePanel.style.visibility = "hidden";
 
   // Load word from array.
   showNewWord(words);
+}
+
+function resetGlobals() {
+  wordInput.value = "";
+  correctKeystrokes = 0;
+  incorrectKeystrokes = 0;
+  scorePanel.style.visibility = "hidden";
 }
 
 // Start match.
@@ -59,9 +65,7 @@ function startMatch() {
 // Match currentWord to wordInput.
 function matchWords(wordInput, currentWord) {
   if (!isPlaying && wordInput.length > 0) {
-    console.log("start countdoddwnn");
-    // Call countdown every second.
-    setInterval(countdown, 1000);
+    startCountdown();
     isPlaying = true;
   }
 
@@ -115,6 +119,10 @@ function shuffle(array) {
   return array;
 }
 
+function startCountdown() {
+  countdownId = setInterval(countdown, 1000);
+}
+
 // Countdown timer.
 function countdown() {
   // Maker sure time is not run out.
@@ -129,6 +137,11 @@ function countdown() {
     console.log("Game over");
   }
 
+  setupTimer();
+}
+
+// Set ups timer display.
+function setupTimer() {
   timeDisplayFormat = "";
   // Setup displayed format.
   timeDisplayFormat += timerMinutes + ":";
@@ -138,6 +151,16 @@ function countdown() {
   timeDisplayFormat += timerSeconds;
 
   timeDisplay.innerHTML = timeDisplayFormat;
+}
+
+// Resets timer to initial time.
+function resetTimer() {
+  // Stop timer.
+  clearInterval(countdownId);
+
+  timerMinutes = initialTimerMinutes;
+  timerSeconds = initialTimerSeconds;
+  setupTimer();
 }
 
 // Check game status.
