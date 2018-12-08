@@ -1,18 +1,16 @@
 // Start comparing input word with current word.
-function startComparingWords(keyPressed) {
-  var userInput = wordInput.value;
-  var currWord = currentWord.innerHTML;
-
-  if (userInput.length == currWord.length && validKeyPressed) {
-    if (isWordCorrect(userInput, currWord)) {
-      jumpToNextWord(currentWord);
+function startComparingWords(userInput, currentWordDOM) {
+  var currentWord = currentWordDOM.innerHTML;
+  if (userInput.length == currentWord.length && validKeyPressed) {
+    if (isWordCorrect(userInput, currentWord)) {
+      jumpToNextWord(currentWordDOM);
       clearWordInput();
     } else {
       // Wrong word.
       markCurrentWordAsWrong(currentWord);
     }
   } else {
-    if (comparePartialWord(userInput, currWord)) {
+    if (comparePartialWord(userInput, currentWord)) {
       // Partially right word.
       console.log("Partial words are matching");
     } else {
