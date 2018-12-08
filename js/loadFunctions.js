@@ -6,15 +6,15 @@ function markCurrentWordAsWrong(currentWord) {
   currentWord.className = "wrong";
 }
 
-function jumpToNextWord(currentWord) {
-  var nextId = parseInt(currentWord.id) + 1;
+function jumpToNextWord(currentWordDOM) {
+  var nextId = parseInt(currentWordDOM.id) + 1;
   var nextWord = document.getElementById(nextId);
   nextWord.className = "current-word";
-  currentWord.className = "success";
+  currentWordDOM.className = "success";
   reloadCurrentWord();
 
   // Scroll word container if needed.
-  if (getOffset(currentWord).left > getOffset(nextWord).left) {
+  if (getOffset(currentWordDOM).left > getOffset(nextWord).left) {
     wordsContainer.style.top = (nextId / 10) * -37 + "px";
   }
 }

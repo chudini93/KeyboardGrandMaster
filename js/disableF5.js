@@ -1,5 +1,7 @@
+document.addEventListener("keydown", disableF5RefreshPage);
+
 // Disable F5 from refreshing page - resetGame() instead.
-function my_onkeydown_handler(event) {
+function disableF5RefreshPage(event) {
   switch (event.keyCode) {
     case 116: // 'F5'
       event.preventDefault();
@@ -9,4 +11,3 @@ function my_onkeydown_handler(event) {
       break;
   }
 }
-document.addEventListener("keydown", my_onkeydown_handler);

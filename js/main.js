@@ -8,28 +8,27 @@ let timerSeconds = initialTimerSeconds;
 let correctKeystrokes = 0;
 let incorrectKeystrokes = 0;
 let isPlaying;
+let notStarted = true;
 let timeDisplayFormat = "0:00";
 let countdownId;
-let currentWord;
+let userInput = "";
 
 // DOM Elements
+let currentWordDOM;
 const wordsContainer = getWordsContainer();
-const wordInput = document.querySelector("#word-input");
 const wpmDisplay = document.querySelector("#wpm");
 const keystrokesDisplay = document.querySelector("#keystrokes");
 const timeDisplay = document.querySelector("#timer");
 const message = document.querySelector("#message");
 const scorePanel = document.querySelector("#score-panel");
-const repeatButton = document.querySelector("#repeat");
+const repeatButtonDOM = document.querySelector("#repeat");
 
 // Initialize Game.
 function init() {
   resetGame();
 
-  repeatButton.addEventListener("click", resetGame);
-
-  wordInput.addEventListener("keyup", startGame);
-
+  repeatButtonDOM.addEventListener("click", resetGame);
+  document.addEventListener("keyup", startGame);
   // Check game status.
   setInterval(checkStatus, 50);
 }
@@ -40,27 +39,51 @@ function resetGame() {
   resetTimer();
   resetGlobals();
   stopGame();
-  showWordInput();
 
   // Load words inside container.
   loadWords();
 }
 
+function addKeyIfValid(event, userInput) {
+  var output = userInput;
+  var allowedChars = [",", ".", ";", "-", " ", "'", "?", "!", "+", "/", "*"];
+  //A-Z 0-9
+  if (
+    (event.keyCode <= 90 && event.keyCode >= 48) ||
+    allowedChars.indexOf(event.key) > -1
+  ) {
+    output += event.key;
+
+    console.log("KeyPressed: ", event.key);
+  }
+
+  if (event.key === "Backspace") {
+    output = userInput.substr(0, userInput.length - 1);
+  }
+
+  return output;
+}
+
 // Starts the game if possible.
 function startGame(keyboardEvent) {
-  if (userStartedTypingAndGameNotStarted()) {
+  if (notStarted) {
+    userInput = addKeyIfValid(keyboardEvent, userInput);
+    console.log("UserInput: ", userInput);
+  }
+
+  if (userStartedTypingAndGameNotStarted(userInput)) {
     console.log("----------> Game has been started <-------------");
     isPlaying = true;
     startCountdown();
   }
 
   if (isPlaying) {
-    startComparingWords(keyboardEvent.key);
+    startComparingWords(userInput, currentWordDOM);
   }
 }
 
-function userStartedTypingAndGameNotStarted() {
-  var output = !isPlaying && wordInput.value.length > 0;
+function userStartedTypingAndGameNotStarted(userInput) {
+  var output = !isPlaying && userInput.length > 0 && notStarted;
   return output;
 }
 
@@ -75,13 +98,12 @@ function resetGlobals() {
   correctKeystrokes = 0;
   incorrectKeystrokes = 0;
   scorePanel.style.visibility = "hidden";
+  notStarted = true;
 }
 
 // Check game status.
 function checkStatus() {
   if (isTimeOverAndGameNotPlaying()) {
-    hideWordInput();
-
     // Display score panel.
     scorePanel.style.visibility = "visible";
     message.innerHTML = "Game Over!!!";
@@ -98,5 +120,5 @@ function isTimeOverAndGameNotPlaying() {
 }
 
 function reloadCurrentWord() {
-  currentWord = document.querySelector(".current-word");
+  currentWordDOM = document.querySelector(".current-word");
 }
