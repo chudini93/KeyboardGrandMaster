@@ -55,24 +55,27 @@ body {
 .words-parent #words-container {
   position: relative;
 }
-.words-parent #words-container span {
-  font-size: 2em;
+.words-parent #words-container div {
+  display: inline-block;
+}
+.words-parent #words-container .letter {
+  font-size: 1.8em;
   font-family: "Times New Roman", Times, serif;
+  min-width: 21px;
+  text-align: center;
 }
-.words-parent #words-container span.current-word {
-  font-weight: bold;
+.words-parent #words-container .letter.current {
+  border-bottom: 5px solid black;
+  background-color: lightgrey;
 }
-.words-parent #words-container span.success {
+.words-parent #words-container .letter.success {
   color: green;
 }
-.words-parent #words-container span.wrong {
+.words-parent #words-container .letter.wrong {
   color: red;
 }
-.words-parent #words-container span.partially-wrong {
+.words-parent #words-container .letter.partially-wrong {
   color: #dd6300;
-}
-.words-parent #words-container span::after {
-  content: " ";
 }
 .game-container {
   text-align: center;

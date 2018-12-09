@@ -14,8 +14,8 @@ let countdownId;
 let userInput = "";
 
 // DOM Elements
-let currentWordDOM;
-const wordsContainer = getWordsContainer();
+let currentLetterDOM;
+const wordsContainerDOM = getWordsContainer();
 const wpmDisplay = document.querySelector("#wpm");
 const keystrokesDisplay = document.querySelector("#keystrokes");
 const timeDisplay = document.querySelector("#timer");
@@ -46,19 +46,22 @@ function resetGame() {
 
 function addKeyIfValid(event, userInput) {
   var output = userInput;
-  var allowedChars = [",", ".", ";", "-", " ", "'", "?", "!", "+", "/", "*"];
+  var allowedChars = [",", ".", ";", "-", "'", "?", "!", "+", "/", "*"];
   //A-Z 0-9
   if (
     (event.keyCode <= 90 && event.keyCode >= 48) ||
     allowedChars.indexOf(event.key) > -1
   ) {
-    output += event.key;
+    output = event.key;
+  }
 
-    console.log("KeyPressed: ", event.key);
+  if (event.key === " ") {
+    output = "&nbsp;";
   }
 
   if (event.key === "Backspace") {
-    output = userInput.substr(0, userInput.length - 1);
+    // output = userInput.substr(0, userInput.length - 1);
+    output = "Backspace";
   }
 
   return output;
@@ -78,7 +81,7 @@ function startGame(keyboardEvent) {
   }
 
   if (isPlaying) {
-    startComparingWords(userInput, currentWordDOM);
+    startComparingLetters(userInput, reloadCurrentLetter());
   }
 }
 
@@ -119,6 +122,7 @@ function isTimeOverAndGameNotPlaying() {
   return output;
 }
 
-function reloadCurrentWord() {
-  currentWordDOM = document.querySelector(".current-word");
+function reloadCurrentLetter() {
+  currentLetterDOM = document.querySelector(".current");
+  return currentLetterDOM;
 }
