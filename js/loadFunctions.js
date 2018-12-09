@@ -1,9 +1,10 @@
-function markCurrentWordAsPartiallyWrong(currentWord) {
-  currentWord.className = "partially-wrong";
+let lineNumber = 1;
+function markCurrentWordAsPartiallyWrong(currentWordDOM) {
+  currentWordDOM.className = "partially-wrong";
 }
 
-function markCurrentWordAsWrong(currentWord) {
-  currentWord.className = "wrong";
+function markCurrentWordAsWrong(currentWordDOM) {
+  currentWordDOM.className = "wrong";
 }
 
 function jumpToNextWord(currentWordDOM) {
@@ -15,7 +16,8 @@ function jumpToNextWord(currentWordDOM) {
 
   // Scroll word container if needed.
   if (getOffset(currentWordDOM).left > getOffset(nextWord).left) {
-    wordsContainer.style.top = (nextId / 10) * -37 + "px";
+    wordsContainer.style.transform = `translateY(${lineNumber * -36}px)`;
+    lineNumber++;
   }
 }
 
@@ -79,7 +81,7 @@ function clearWordsContainerFirst() {
   wordsContainer.innerHTML = "";
 
   // Reset position of words Container.
-  wordsContainer.style.top = "0px";
+  wordsContainer.style.transform = `translateY(0px)`;
 }
 
 function getOffset(el) {

@@ -7,7 +7,7 @@ function startComparingWords(userInput, currentWordDOM) {
       clearWordInput();
     } else {
       // Wrong word.
-      markCurrentWordAsWrong(currentWord);
+      markCurrentWordAsWrong(currentWordDOM);
     }
   } else {
     if (comparePartialWord(userInput, currentWord)) {
@@ -15,7 +15,7 @@ function startComparingWords(userInput, currentWordDOM) {
       console.log("Partial words are matching");
     } else {
       // Wrong word
-      markCurrentWordAsPartiallyWrong(currentWord);
+      markCurrentWordAsPartiallyWrong(currentWordDOM);
     }
   }
 }
