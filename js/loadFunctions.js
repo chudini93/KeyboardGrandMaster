@@ -1,22 +1,40 @@
 let lineNumber = 1;
-function markCurrentWordAsPartiallyWrong(currentWordDOM) {
-  currentWordDOM.className = "partially-wrong";
+
+function markAsWrong(domElement) {
+  domElement.className = "letter wrong";
 }
 
-function markCurrentWordAsWrong(currentWordDOM) {
-  currentWordDOM.className = "wrong";
+function markAsSuccess(domElement) {
+  domElement.className = "letter success";
 }
 
-function jumpToNextWord(currentWordDOM) {
-  var nextId = parseInt(currentWordDOM.id) + 1;
-  var nextWord = document.getElementById(nextId);
-  nextWord.className = "current-word";
-  currentWordDOM.className = "success";
-  reloadCurrentWord();
+function jumpBackToPreviousLetter(currentLetterDOM) {
+  var previousLetterDOM = currentLetterDOM.previousSibling;
+  if (previousLetterDOM == null) {
+    let previousWord = currentLetterDOM.parentNode.previousSibling;
+    if (previousWord != null) {
+      previousLetterDOM = previousWord.lastChild;
+    }
+  }
+
+  if (previousLetterDOM != null) {
+    currentLetterDOM.className = "letter";
+    previousLetterDOM.className = "letter current";
+  } else {
+    // TODO: Not possible to back to previous letter - it does not exists.
+  }
+}
+
+function jumpToNextLetter(currentLetterDOM) {
+  var nextLetterDOM = currentLetterDOM.nextSibling;
+  if (nextLetterDOM == null) {
+    nextLetterDOM = currentLetterDOM.parentNode.nextSibling.firstChild;
+  }
+  nextLetterDOM.className = "letter current";
 
   // Scroll word container if needed.
-  if (getOffset(currentWordDOM).left > getOffset(nextWord).left) {
-    wordsContainer.style.transform = `translateY(${lineNumber * -36}px)`;
+  if (getOffset(currentLetterDOM).left > getOffset(nextLetterDOM).left) {
+    wordsContainerDOM.style.transform = `translateY(${lineNumber * -36}px)`;
     lineNumber++;
   }
 }
@@ -26,13 +44,29 @@ function loadWords() {
   clearWordsContainerFirst();
   var randomWords = shuffle(basicEnglishWords);
   generateWordsInsideContainer(randomWords);
-  reloadCurrentWord();
+  reloadCurrentLetter();
 }
 
 function generateWordsInsideContainer(words) {
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
-    generateSpanInWordContainer(i, i == 0 ? "current-word" : "", word);
+  for (let wordIndex = 0; wordIndex < words.length; wordIndex++) {
+    const word = words[wordIndex];
+
+    const wordDOM = generateDivInParent(
+      `word${wordIndex}`,
+      "word",
+      null,
+      wordsContainerDOM
+    );
+
+    for (let letterIndex = 0; letterIndex < word.length; letterIndex++) {
+      let letter = word[letterIndex];
+      if (letter === " ") {
+        letter = "&nbsp;";
+      }
+      let className =
+        wordIndex === 0 && letterIndex === 0 ? "letter current" : "letter";
+      generateDivInParent(`letter${letterIndex}`, className, letter, wordDOM);
+    }
   }
 }
 
@@ -61,27 +95,31 @@ function getWordsContainer() {
   var output = document.getElementById("words-container");
 
   // Remove dummy element which was created only because without that div wouldn't exist.
-  var dummySpan = document.getElementById("dummy");
-  dummySpan.parentNode.removeChild(dummySpan);
+  var dummyDiv = document.getElementById("dummy");
+  dummyDiv.parentNode.removeChild(dummyDiv);
 
   return output;
 }
 
-// Generates span inside wordContainer.
-function generateSpanInWordContainer(id, className, text) {
-  var newSpan = document.createElement("span");
-  newSpan.id = id;
-  newSpan.className = className;
-  newSpan.innerHTML = text;
-  wordsContainer.appendChild(newSpan);
+// Generates div inside parent container.
+function generateDivInParent(id, className, text, parentDOM) {
+  var newDiv = document.createElement("div");
+  newDiv.id = id;
+  newDiv.className = className;
+  if (text !== null) {
+    newDiv.innerHTML = text;
+  }
+  parentDOM.appendChild(newDiv);
+
+  return newDiv;
 }
 
-// Clear words container before any span are included, to remove duplicates.
+// Clear words container before any div are included, to remove duplicates.
 function clearWordsContainerFirst() {
-  wordsContainer.innerHTML = "";
+  wordsContainerDOM.innerHTML = "";
 
   // Reset position of words Container.
-  wordsContainer.style.transform = `translateY(0px)`;
+  wordsContainerDOM.style.transform = `translateY(0px)`;
 }
 
 function getOffset(el) {

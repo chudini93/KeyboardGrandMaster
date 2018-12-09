@@ -1,55 +1,37 @@
-// Start comparing input word with current word.
-function startComparingWords(userInput, currentWordDOM) {
-  var currentWord = currentWordDOM.innerHTML;
-  if (userInput.length == currentWord.length && validKeyPressed) {
-    if (isWordCorrect(userInput, currentWord)) {
-      jumpToNextWord(currentWordDOM);
+// Start comparing user input key with current letter.
+function startComparingLetters(userInput, currentLetterDOM) {
+  var currentLetter = currentLetterDOM.innerHTML;
+  console.log(`current: ${currentLetter} input: ${userInput}`);
+  if (validKeyPressed(userInput)) {
+    if (isLetterCorrect(userInput, currentLetter)) {
+      markAsSuccess(currentLetterDOM);
+      jumpToNextLetter(currentLetterDOM);
       clearWordInput();
     } else {
       // Wrong word.
-      markCurrentWordAsWrong(currentWordDOM);
+      markAsWrong(currentLetterDOM);
+      jumpToNextLetter(currentLetterDOM);
     }
   } else {
-    if (comparePartialWord(userInput, currentWord)) {
-      // Partially right word.
-      console.log("Partial words are matching");
-    } else {
-      // Wrong word
-      markCurrentWordAsPartiallyWrong(currentWordDOM);
-    }
+    jumpBackToPreviousLetter(currentLetterDOM);
   }
 }
 
 function validKeyPressed(key) {
-  var output = key != " " && key != "Backspace";
+  var output = key != "Backspace";
   return output;
 }
 
-// Match currentWord to wordInput.
-function isWordCorrect(wordInput, currentWord) {
-  if (wordInput === currentWord) {
+// Compare currentLetter to userInput.
+function isLetterCorrect(userInput, currentLetter) {
+  if (userInput === currentLetter) {
     message.innerHTML = "Correct";
 
-    // Increase correct Keystrokes by length of current word.
-    correctKeystrokes += currentWord.length;
+    correctKeystrokes++;
     return true;
   } else {
     message.innerHTML = "Incorrect";
-    // TODO: Fix incorrectKeystrokes.
     incorrectKeystrokes++;
     return false;
   }
-}
-
-// Compares word that is not yet fully typed.
-function comparePartialWord(partialUserInput, currentWord) {
-  var output = false;
-  var partialCurrentWord = currentWord.substr(0, partialUserInput.length);
-  if (partialUserInput == partialCurrentWord) {
-    // Part of the words are matching right now.
-    // Keystrokes should not be increased since those are just partials.
-    output = true;
-  }
-
-  return output;
 }
