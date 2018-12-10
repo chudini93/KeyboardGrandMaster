@@ -56,7 +56,7 @@ body {
 }
 
 .main-container {
-    width: 800px;
+    width: 900px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
@@ -72,26 +72,26 @@ body {
 
 .words-parent {
     background-color: @whiteColor;
-    height: 70px;
+    height: 114px;
     margin: 10px 0;
     overflow: hidden;
-    border-radius: 10px;
     border: 1px solid @mainColor;
     padding: 0px 5px;
     #words-container {
         position: relative;
+        transition: transform 0.2s ease-out;
         div {
             display: inline-block;
         }
         .letter {
-            font-size: 1.8em;
+            font-size: 2em;
             font-family: @fontFamily;
-            min-width: 21px;
+            min-width: 17px;
             text-align: center;
         }
         .letter.current {
-            border-bottom: 5px solid @wetAsphalt;
-            background-color: @whiteColor;
+            color: @whiteColor;
+            background-color: @wetAsphalt;
         }
         .letter.success {
             color: @whiteColor;

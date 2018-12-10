@@ -36,11 +36,7 @@ function jumpToNextLetter(currentLetterDOM) {
   }
   nextLetterDOM.className = "letter current";
 
-  // Scroll word container if needed.
-  if (getOffset(currentLetterDOM).left > getOffset(nextLetterDOM).left) {
-    wordsContainerDOM.style.transform = `translateY(${lineNumber * -36}px)`;
-    lineNumber++;
-  }
+  scrollToNextLine(currentLetterDOM, nextLetterDOM);
 }
 
 // Pick & show random word
@@ -49,6 +45,7 @@ function loadWords() {
   var randomWords = shuffle(basicEnglishWords);
   generateWordsInsideContainer(randomWords);
   reloadCurrentLetter();
+  setupWordsParentHeight(visibleLines);
 }
 
 function generateWordsInsideContainer(words) {
@@ -130,6 +127,50 @@ function getOffset(el) {
   const rect = el.getBoundingClientRect();
   return {
     left: rect.left + window.scrollX,
-    top: rect.top + window.scrollY
+    top: rect.top + window.scrollY,
+    bottom: rect.bottom + window.scrollY
   };
+}
+
+// Setups height for words-parent based on number of visible lines.
+function setupWordsParentHeight(visibleLines) {
+  let currentLetterHeight = currentLetterDOM.scrollHeight;
+  wordsParentContainerDOM.style.height =
+    currentLetterHeight * visibleLines + "px";
+}
+
+// Scrolls word container if needed.
+function scrollToNextLine(currentLetterDOM, nextLetterDOM) {
+  if (isLastLetterInTheLine(currentLetterDOM, nextLetterDOM)) {
+    let currentLetterHeight = currentLetterDOM.scrollHeight;
+    if (moreWordsCanBeSeenInContainer(currentLetterHeight)) {
+      const translateY = `translateY(${lineNumber * -currentLetterHeight}px)`;
+      wordsContainerDOM.style.transform = translateY;
+      lineNumber++;
+    }
+  }
+}
+
+function isLastLetterInTheLine(currentLetterDOM, nextLetterDOM) {
+  const output =
+    getOffset(currentLetterDOM).left > getOffset(nextLetterDOM).left;
+  return output;
+}
+
+// Indicates if more words can be seen in container. If not there is no point in scrolling the words.
+function moreWordsCanBeSeenInContainer(currentLetterHeight) {
+  const output =
+    getOffset(wordsContainerDOM).bottom - currentLetterHeight >
+    getOffset(wordsParentContainerDOM).bottom;
+
+  return output;
+}
+
+function scrollLineTest() {
+  let currentLetterHeight = currentLetterDOM.scrollHeight;
+  if (moreWordsCanBeSeenInContainer(currentLetterHeight)) {
+    const translateY = `translateY(${lineNumber * -currentLetterHeight}px)`;
+    wordsContainerDOM.style.transform = translateY;
+    lineNumber++;
+  }
 }
