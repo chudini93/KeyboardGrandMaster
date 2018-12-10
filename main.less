@@ -2,136 +2,149 @@
 @mainColorDarker: #2980b9;
 @wetAsphalt: #2c3e50;
 @whiteColor: #ffffff;
+@backgroundColor: #e9ecef;
+@red: #dc3545;
+@green: #28a745;
+@black: #343a40;
 @fontRegular: 1.7em;
 @fontSmall: 1.2em;
 @fontSmaller: 1em;
 @fontSmallest: 0.5em;
+@fontFamily: -apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Roboto,
+"Helvetica Neue",
+Arial,
+sans-serif,
+"Apple Color Emoji",
+"Segoe UI Emoji",
+"Segoe UI Symbol",
+"Noto Color Emoji";
 body {
-  font-family: "Courier New", Courier, monospace;
-  margin: 0;
-  background-image: url("images/clouds.png");
-  background-size: cover;
+    font-family: "Courier New", Courier, monospace;
+    margin: 0;
+    background-color: @backgroundColor;
 }
 
 *:focus {
-  outline: none;
+    outline: none;
 }
 
 .navigation {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  height: 37px;
-  z-index: 10;
-  background-color: @mainColor;
-  text-align: center;
-  .title {
-    margin: 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 37px;
+    z-index: 10;
+    background-color: @mainColor;
     text-align: center;
-    color: white;
-    text-transform: uppercase;
-    display: inline;
-  }
+    .title {
+        margin: 0;
+        text-align: center;
+        color: white;
+        text-transform: uppercase;
+        display: inline;
+    }
 }
 
 .center-middle {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .main-container {
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 40px;
-  #score-panel {
-    margin-top: 20px;
-    background-color: @whiteColor;
-    border: 1px solid @mainColor;
-    text-align: center;
-    visibility: hidden;
-    font-size: @fontSmallest;
-  }
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    #score-panel {
+        margin-top: 20px;
+        background-color: @whiteColor;
+        border: 1px solid @mainColor;
+        text-align: center;
+        visibility: hidden;
+        font-size: @fontSmallest;
+    }
 }
 
 .words-parent {
-  background-color: @whiteColor;
-  height: 70px;
-  margin: 10px 0;
-  overflow: hidden;
-  border-radius: 10px;
-  border: 1px solid @mainColor;
-  padding: 0px 5px;
-  #words-container {
-    position: relative;
-    div {
-      display: inline-block;
+    background-color: @whiteColor;
+    height: 114px;
+    margin: 10px 0;
+    overflow: hidden;
+    border: 1px solid @mainColor;
+    padding: 0px 5px;
+    #words-container {
+        position: relative;
+        transition: transform 0.2s ease-out;
+        div {
+            display: inline-block;
+        }
+        .letter {
+            font-size: 2em;
+            font-family: @fontFamily;
+            min-width: 17px;
+            text-align: center;
+        }
+        .letter.current {
+            color: @whiteColor;
+            background-color: @wetAsphalt;
+        }
+        .letter.success {
+            color: @whiteColor;
+            background-color: @green;
+        }
+        .letter.wrong {
+            color: @whiteColor;
+            background-color: @red;
+        }
     }
-    .letter {
-      font-size: 1.8em;
-      font-family: "Times New Roman", Times, serif;
-      min-width: 21px;
-      text-align: center;
-    }
-    .letter.current {
-      border-bottom: 5px solid black;
-      background-color: lightgrey;
-    }
-    .letter.success {
-      color: green;
-    }
-    .letter.wrong {
-      color: red;
-    }
-    .letter.partially-wrong {
-      color: rgb(221, 99, 0);
-    }
-  }
 }
 
 .game-container {
-  text-align: center;
-  animation-duration: 2s;
-  animation-name: fadein;
-  input {
-    padding: 4px 10px;
-    border-radius: 5px;
-    border: 1px solid @mainColor;
-    height: 40px;
-    width: 40%;
-    min-width: 150px;
-    max-width: 600px;
-    vertical-align: middle;
-    font-size: @fontRegular;
-  }
-  .timer {
-    background-color: @wetAsphalt;
-    padding: 10px 8px;
-    color: white;
-    border-radius: 3px;
-    font-size: @fontSmall;
-  }
-  .btn {
-    padding: 10px 8px;
-    font-size: @fontSmall;
-    border-radius: 3px;
-    border: 1px solid @mainColor;
-    background-color: @mainColor;
-    color: @whiteColor;
-  }
-  .btn:hover {
-    cursor: pointer;
-    background-color: @mainColorDarker;
-  }
+    text-align: center;
+    animation-duration: 2s;
+    animation-name: fadein;
+    input {
+        padding: 4px 10px;
+        border-radius: 5px;
+        border: 1px solid @mainColor;
+        height: 40px;
+        width: 40%;
+        min-width: 150px;
+        max-width: 600px;
+        vertical-align: middle;
+        font-size: @fontRegular;
+    }
+    .timer {
+        background-color: @wetAsphalt;
+        padding: 10px 8px;
+        color: white;
+        border-radius: 3px;
+        font-size: @fontSmall;
+    }
+    .btn {
+        padding: 10px 8px;
+        font-size: @fontSmall;
+        border-radius: 3px;
+        border: 1px solid @mainColor;
+        background-color: @mainColor;
+        color: @whiteColor;
+    }
+    .btn:hover {
+        cursor: pointer;
+        background-color: @mainColorDarker;
+    }
 }
 
 @keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

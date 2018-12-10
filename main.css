@@ -1,8 +1,7 @@
 body {
   font-family: "Courier New", Courier, monospace;
   margin: 0;
-  background-image: url("images/clouds.png");
-  background-size: cover;
+  background-color: #e9ecef;
 }
 *:focus {
   outline: none;
@@ -30,7 +29,7 @@ body {
   transform: translate(-50%, -50%);
 }
 .main-container {
-  width: 800px;
+  width: 900px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -45,37 +44,36 @@ body {
 }
 .words-parent {
   background-color: #ffffff;
-  height: 70px;
+  height: 114px;
   margin: 10px 0;
   overflow: hidden;
-  border-radius: 10px;
   border: 1px solid #3498db;
   padding: 0px 5px;
 }
 .words-parent #words-container {
   position: relative;
+  transition: transform 0.2s ease-out;
 }
 .words-parent #words-container div {
   display: inline-block;
 }
 .words-parent #words-container .letter {
-  font-size: 1.8em;
-  font-family: "Times New Roman", Times, serif;
-  min-width: 21px;
+  font-size: 2em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  min-width: 17px;
   text-align: center;
 }
 .words-parent #words-container .letter.current {
-  border-bottom: 5px solid black;
-  background-color: lightgrey;
+  color: #ffffff;
+  background-color: #2c3e50;
 }
 .words-parent #words-container .letter.success {
-  color: green;
+  color: #ffffff;
+  background-color: #28a745;
 }
 .words-parent #words-container .letter.wrong {
-  color: red;
-}
-.words-parent #words-container .letter.partially-wrong {
-  color: #dd6300;
+  color: #ffffff;
+  background-color: #dc3545;
 }
 .game-container {
   text-align: center;

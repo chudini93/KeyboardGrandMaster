@@ -1,8 +1,9 @@
 window.addEventListener("load", init);
 
 // Globals
+const visibleLines = 3;
 const initialTimerMinutes = 0;
-const initialTimerSeconds = 20;
+const initialTimerSeconds = 25;
 let timerMinutes = initialTimerMinutes;
 let timerSeconds = initialTimerSeconds;
 let correctKeystrokes = 0;
@@ -16,16 +17,23 @@ let userInput = "";
 // DOM Elements
 let currentLetterDOM;
 const wordsContainerDOM = getWordsContainer();
+const wordsParentContainerDOM = document.getElementsByClassName("words-parent")[
+  "0"
+];
 const wpmDisplay = document.querySelector("#wpm");
 const keystrokesDisplay = document.querySelector("#keystrokes");
 const timeDisplay = document.querySelector("#timer");
 const message = document.querySelector("#message");
 const scorePanel = document.querySelector("#score-panel");
 const repeatButtonDOM = document.querySelector("#repeat");
+const scrollNextLineButtonDOM = document.querySelector("#scroll");
 
 // Initialize Game.
 function init() {
   resetGame();
+
+  // TODO: Testing purposes only, remove if not needed.
+  scrollNextLineButtonDOM.addEventListener("click", scrollLineTest);
 
   repeatButtonDOM.addEventListener("click", resetGame);
   document.addEventListener("keyup", startGame);
@@ -39,6 +47,8 @@ function resetGame() {
   resetTimer();
   resetGlobals();
   stopGame();
+  resetLineNumber();
+  reloadCurrentLetter();
 
   // Load words inside container.
   loadWords();
@@ -71,7 +81,6 @@ function addKeyIfValid(event, userInput) {
 function startGame(keyboardEvent) {
   if (notStarted) {
     userInput = addKeyIfValid(keyboardEvent, userInput);
-    console.log("UserInput: ", userInput);
   }
 
   if (userStartedTypingAndGameNotStarted(userInput)) {
@@ -118,7 +127,8 @@ function checkStatus() {
 
 // Indicates if time is over and game not playing.
 function isTimeOverAndGameNotPlaying() {
-  var output = isPlaying && timerSeconds === 0 && timerMinutes === 0;
+  var output =
+    !isPlaying && !notStarted && timerSeconds === 0 && timerMinutes === 0;
   return output;
 }
 
