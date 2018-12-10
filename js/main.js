@@ -118,7 +118,8 @@ function checkStatus() {
 
 // Indicates if time is over and game not playing.
 function isTimeOverAndGameNotPlaying() {
-  var output = isPlaying && timerSeconds === 0 && timerMinutes === 0;
+  var output =
+    !isPlaying && !notStarted && timerSeconds === 0 && timerMinutes === 0;
   return output;
 }
 
