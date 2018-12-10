@@ -19,7 +19,9 @@ function countdown() {
   } else if (timerSeconds === 0 && timerMinutes > 0) {
     timerMinutes--;
     timerSeconds = 59;
-  } else if (timerSeconds === 0 && timerMinutes === 0) {
+  }
+
+  if (timerSeconds === 0 && timerMinutes === 0) {
     isPlaying = false;
     notStarted = false;
     console.log("----------> Time is over - game stopped <-------------");
