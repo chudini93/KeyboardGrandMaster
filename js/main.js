@@ -2,7 +2,7 @@ window.addEventListener("load", init);
 
 // Globals
 const initialTimerMinutes = 0;
-const initialTimerSeconds = 20;
+const initialTimerSeconds = 5;
 let timerMinutes = initialTimerMinutes;
 let timerSeconds = initialTimerSeconds;
 let correctKeystrokes = 0;
@@ -39,6 +39,7 @@ function resetGame() {
   resetTimer();
   resetGlobals();
   stopGame();
+  resetLineNumber();
 
   // Load words inside container.
   loadWords();
@@ -71,7 +72,6 @@ function addKeyIfValid(event, userInput) {
 function startGame(keyboardEvent) {
   if (notStarted) {
     userInput = addKeyIfValid(keyboardEvent, userInput);
-    console.log("UserInput: ", userInput);
   }
 
   if (userStartedTypingAndGameNotStarted(userInput)) {

@@ -1,5 +1,9 @@
 let lineNumber = 1;
 
+function resetLineNumber() {
+  lineNumber = 1;
+}
+
 function markAsWrong(domElement) {
   domElement.className = "letter wrong";
 }
