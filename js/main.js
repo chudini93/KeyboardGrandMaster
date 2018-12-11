@@ -52,6 +52,12 @@ function resetGame() {
 
   // Load words inside container.
   loadWords();
+  removeBlurFromButton();
+}
+
+// Remove focus from all buttons.
+function removeBlurFromButton() {
+  if (document.activeElement != document.body) document.activeElement.blur();
 }
 
 function addKeyIfValid(event, userInput) {

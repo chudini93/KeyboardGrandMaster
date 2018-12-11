@@ -25,6 +25,7 @@ function jumpBackToPreviousLetter(currentLetterDOM) {
     currentLetterDOM.className = "letter";
     previousLetterDOM.className = "letter current";
   } else {
+    alert("Not possible to go back to previous letter - it does not exists");
     // TODO: Not possible to back to previous letter - it does not exists.
   }
 }
@@ -173,4 +174,5 @@ function scrollLineTest() {
     wordsContainerDOM.style.transform = translateY;
     lineNumber++;
   }
+  removeBlurFromButton();
 }
