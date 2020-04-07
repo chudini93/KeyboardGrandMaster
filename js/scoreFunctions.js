@@ -17,8 +17,10 @@ function calculateWPM() {
 }
 
 function calculateKeystrokesInfo() {
+  var accuracy = ((correctKeystrokes/(correctKeystrokes + incorrectKeystrokes))*100.00).toFixed(2);
+
   var output = `Keystrokes (correct:${correctKeystrokes} | incorrect: ${incorrectKeystrokes} | all: ${correctKeystrokes +
-    incorrectKeystrokes})`;
+    incorrectKeystrokes}) Accuracy: ${accuracy}%`;
 
   return output;
 }

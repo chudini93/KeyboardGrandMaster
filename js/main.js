@@ -26,14 +26,10 @@ const timeDisplay = document.querySelector("#timer");
 const message = document.querySelector("#message");
 const scorePanel = document.querySelector("#score-panel");
 const repeatButtonDOM = document.querySelector("#repeat");
-const scrollNextLineButtonDOM = document.querySelector("#scroll");
 
 // Initialize Game.
 function init() {
   resetGame();
-
-  // TODO: Testing purposes only, remove if not needed.
-  scrollNextLineButtonDOM.addEventListener("click", scrollLineTest);
 
   repeatButtonDOM.addEventListener("click", resetGame);
   document.addEventListener("keyup", startGame);
